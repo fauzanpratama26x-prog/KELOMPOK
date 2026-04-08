@@ -12,82 +12,191 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <style>
+        :root {
+            --green-50:  #f0fdf4;
+            --green-100: #dcfce7;
+            --green-200: #bbf7d0;
+            --green-400: #4ade80;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --green-800: #166534;
+            --green-900: #14532d;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
         }
-        
-        /* Glass effect yang lebih halus */
+
+        /* Glass Navbar */
         .glass-effect {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--green-100);
         }
         .dark .glass-effect {
-            background: rgba(17, 17, 17, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(10, 30, 18, 0.92);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.08);
         }
-        
-        /* Card shadow yang lebih sophisticated */
+
+        /* Card shadow */
         .card-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.06), 0 2px 4px -1px rgba(22, 163, 74, 0.03);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .card-shadow:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 20px 25px -5px rgba(22, 163, 74, 0.1), 0 10px 10px -5px rgba(22, 163, 74, 0.04);
             transform: translateY(-4px);
         }
-        
-        /* Gradient border yang lebih subtle */
+
+        /* Gradient border card */
         .gradient-border {
             position: relative;
-            background: rgb(199, 199, 199);
+            background: #ffffff;
             border-radius: 1rem;
+            border: 1px solid var(--green-100);
             z-index: 1;
+            transition: border-color 0.3s ease;
         }
         .dark .gradient-border {
-            background: #111827;
+            background: #0d2018;
+            border-color: rgba(74, 222, 128, 0.1);
         }
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-            border-radius: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
+        .gradient-border:hover {
+            border-color: var(--green-400);
         }
-        .dark .gradient-border::before {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        }
-        .gradient-border:hover::before {
-            opacity: 1;
-        }
-        
-        /* Feature card yang lebih clean */
+
+        /* Feature card */
         .feature-card {
             transition: all 0.3s ease;
             border-left: 2px solid transparent;
         }
         .feature-card:hover {
-            border-left-color: #9ca3af;
-            background: linear-gradient(to right, rgba(156, 163, 175, 0.03), transparent);
+            border-left-color: var(--green-500);
+            background: linear-gradient(to right, rgba(74, 222, 128, 0.05), transparent);
             transform: translateX(4px);
         }
-        
-        /* Spacing utilities */
-        .section-padding {
-            padding-top: 6rem;
-            padding-bottom: 6rem;
+
+        /* Pill badge */
+        .badge-green {
+            background: var(--green-50);
+            color: var(--green-700);
+            border: 1px solid var(--green-200);
         }
-        
+        .dark .badge-green {
+            background: rgba(22, 101, 52, 0.3);
+            color: var(--green-400);
+            border-color: rgba(74, 222, 128, 0.2);
+        }
+
+        /* Section dot number */
+        .section-num {
+            color: var(--green-200);
+        }
+        .dark .section-num {
+            color: rgba(74, 222, 128, 0.15);
+        }
+
+        /* Divider line */
+        .divider-green {
+            background: linear-gradient(to right, transparent, var(--green-400), transparent);
+            height: 1px;
+            border: none;
+        }
+
         /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
+        html { scroll-behavior: smooth; }
+
+        /* Section bg subtle */
+        .section-alt {
+            background: var(--green-50);
+            border-top: 1px solid var(--green-100);
+            border-bottom: 1px solid var(--green-100);
+        }
+        .dark .section-alt {
+            background: rgba(10, 30, 18, 0.5);
+            border-color: rgba(74, 222, 128, 0.06);
+        }
+
+        /* Nav underline accent */
+        .nav-underline span {
+            background-color: var(--green-500);
+        }
+
+        /* Primary button */
+        .btn-primary {
+            background: var(--green-700);
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            background: var(--green-800);
+        }
+        .dark .btn-primary {
+            background: var(--green-500);
+            color: #0a1a0f;
+        }
+        .dark .btn-primary:hover {
+            background: var(--green-400);
+        }
+
+        /* Secondary button */
+        .btn-secondary {
+            border: 1px solid var(--green-200);
+            color: var(--green-800);
+            background: transparent;
+        }
+        .btn-secondary:hover {
+            background: var(--green-50);
+            border-color: var(--green-400);
+        }
+        .dark .btn-secondary {
+            border-color: rgba(74, 222, 128, 0.2);
+            color: var(--green-400);
+        }
+        .dark .btn-secondary:hover {
+            background: rgba(74, 222, 128, 0.05);
+        }
+
+        /* Icon box */
+        .icon-box {
+            background: var(--green-50);
+        }
+        .dark .icon-box {
+            background: rgba(22, 101, 52, 0.2);
+        }
+        .icon-box svg {
+            color: var(--green-700);
+        }
+        .dark .icon-box svg {
+            color: var(--green-400);
+        }
+
+        /* Footer border */
+        footer {
+            border-top: 1px solid var(--green-100);
+        }
+        .dark footer {
+            border-color: rgba(74, 222, 128, 0.06);
+        }
+
+        /* Text secondary */
+        .text-muted {
+            color: #6b7280;
+        }
+        .dark .text-muted {
+            color: #6b7280;
+        }
+
+        /* Hero dot pattern */
+        .hero-pattern {
+            background-image: radial-gradient(circle, var(--green-200) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .dark .hero-pattern {
+            background-image: radial-gradient(circle, rgba(74, 222, 128, 0.12) 1px, transparent 0);
         }
     </style>
 </head>
@@ -98,34 +207,37 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <div class="flex items-center gap-2">
+                    <div style="width:28px;height:28px;background:var(--green-600);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="16" height="16" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                    </div>
                     <span class="text-xl font-semibold tracking-tight">
                         <span class="text-gray-900 dark:text-white">TOKO</span>
-                        <span class="text-gray-500 dark:text-gray-400 ml-1 font-light">INDONESIA</span>
+                        <span class="ml-1 font-light" style="color:var(--green-600)">INDONESIA</span>
                     </span>
                 </div>
                 
                 <!-- Navigation -->
                 <div class="flex items-center space-x-8">
                     <a href="#tentang" 
-                       class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition relative group py-2">
+                       class="nav-underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition relative group py-2">
                         Tentang
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-900 dark:bg-white transition-all group-hover:w-full"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 transition-all group-hover:w-full"></span>
                     </a>
                     <a href="#fitur" 
-                       class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition relative group py-2">
+                       class="nav-underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition relative group py-2">
                         Fitur
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-900 dark:bg-white transition-all group-hover:w-full"></span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 transition-all group-hover:w-full"></span>
                     </a>
                     
                     @auth
                         <a href="{{ route('admin.dashboard') }}" 
-                           class="text-sm px-5 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition shadow-sm">
+                           class="btn-primary text-sm px-5 py-2 rounded-lg transition shadow-sm">
                             Dashboard
                         </a>
                     @else
                         <a href="{{ route('login') }}" 
-                           class="text-sm px-5 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition shadow-sm">
+                           class="btn-primary text-sm px-5 py-2 rounded-lg transition shadow-sm">
                             Login
                         </a>
                     @endauth
@@ -136,14 +248,16 @@
 
     <!-- Hero Section -->
     <section class="pt-40 pb-24 px-6 relative overflow-hidden">
-        <!-- Subtle pattern background -->
-        <div class="absolute inset-0 opacity-[0.02]">
-            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 40px 40px;"></div>
+        <div class="absolute inset-0 opacity-[0.035]">
+            <div class="absolute inset-0 hero-pattern"></div>
         </div>
+        <!-- Subtle green glow top center -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-64 rounded-full opacity-10"
+             style="background: radial-gradient(ellipse, var(--green-400), transparent 70%); pointer-events:none;"></div>
         
         <div class="max-w-4xl mx-auto text-center relative">
-            <div class="inline-block mb-8 animate-fade-in">
-                <span class="text-xs font-medium text-gray-500 dark:text-gray-500 tracking-[0.2em] px-5 py-2 border border-gray-200 dark:border-gray-800 rounded-full uppercase">
+            <div class="inline-block mb-8">
+                <span class="badge-green text-xs font-medium tracking-[0.2em] px-5 py-2 rounded-full uppercase">
                     Sistem Manajemen Inventori
                 </span>
             </div>
@@ -152,37 +266,37 @@
                 Sistem Pergudangan
             </h1>
             
-            <h2 class="text-3xl md:text-4xl font-light text-gray-400 dark:text-gray-500 mb-8">
+            <h2 class="text-3xl md:text-4xl font-light mb-8" style="color:var(--green-600)">
                 Toko Indonesia
             </h2>
             
-            <p class="text-lg text-gray-500 dark:text-gray-500 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
                 Kelola stok barang dan supplier dengan sistem yang sederhana, cepat, dan efisien.
             </p>
         </div>
     </section>
 
-    <!-- Cards Section -->
+    <!-- Role Cards -->
     <section class="pb-24 px-6">
         <div class="max-w-5xl mx-auto">
             <div class="grid md:grid-cols-2 gap-8">
-                
-                <!-- Petugas Card -->
+
+                <!-- Petugas Gudang -->
                 <div class="gradient-border card-shadow p-8">
                     <div class="mb-6">
-                        <div class="w-14 h-14 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center mb-4">
-                            <svg class="w-7 h-7 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="icon-box w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
                             </svg>
                         </div>
                         <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-2">Petugas Gudang</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-600 leading-relaxed">
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                             Akses untuk melihat dan memantau stok barang di gudang.
                         </p>
                     </div>
                     
                     <a href="{{ route('gudang.index') }}" 
-                       class="inline-block w-full text-center py-3 text-sm text-gray-700 dark:text-gray-500 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-all">
+                       class="btn-secondary inline-block w-full text-center py-3 text-sm rounded-lg transition-all">
                         Masuk sebagai Petugas
                     </a>
                     
@@ -191,28 +305,28 @@
                     </p>
                 </div>
 
-                <!-- Admin Card -->
+                <!-- Administrator -->
                 <div class="gradient-border card-shadow p-8">
                     <div class="mb-6">
-                        <div class="w-14 h-14 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center mb-4">
-                            <svg class="w-7 h-7 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="icon-box w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                             </svg>
                         </div>
                         <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-2">Administrator</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-600 leading-relaxed">
+                        <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                             Akses penuh untuk mengelola data barang dan supplier.
                         </p>
                     </div>
                     
                     @auth
                         <a href="{{ route('admin.dashboard') }}" 
-                           class="inline-block w-full text-center py-3 text-sm bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-sm">
+                           class="btn-primary inline-block w-full text-center py-3 text-sm rounded-lg transition-all shadow-sm">
                             Lanjut ke Dashboard
                         </a>
                     @else
                         <a href="{{ route('login') }}" 
-                           class="inline-block w-full text-center py-3 text-sm bg-gray-900 dark:bg-gray-200 text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all shadow-sm">
+                           class="btn-primary inline-block w-full text-center py-3 text-sm rounded-lg transition-all shadow-sm">
                             Login sebagai Admin
                         </a>
                     @endauth
@@ -222,39 +336,37 @@
     </section>
 
     <!-- Tentang Section -->
-    <section id="tentang" class="py-24 px-6 bg-gray-50/50 dark:bg-gray-900/50 border-t border-gray-100 dark:border-gray-800">
+    <section id="tentang" class="section-alt py-24 px-6">
         <div class="max-w-5xl mx-auto">
-            <!-- Section Header -->
             <div class="text-center mb-16">
-                <span class="text-xs font-medium text-gray-400 dark:text-gray-600 tracking-widest uppercase mb-3 block">01 · TENTANG</span>
-                <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3 tracking-tight">
+                <span class="text-xs font-medium tracking-widest uppercase mb-3 block" style="color:var(--green-600)">01 · TENTANG</span>
+                <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-4 tracking-tight">
                     Tentang Aplikasi
                 </h2>
-                <div class="w-16 h-px bg-gray-300 dark:bg-gray-700 mx-auto"></div>
+                <div class="divider-green w-24 mx-auto"></div>
             </div>
-            
-            <!-- Cards -->
+          
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="text-center p-6">
-                    <div class="text-5xl font-thin text-gray-300 dark:text-gray-700 mb-4">01</div>
+                    <div class="text-5xl font-thin section-num mb-4">01</div>
                     <h3 class="text-base font-medium text-gray-900 dark:text-white mb-3">Manajemen Barang</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 leading-relaxed">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                         Kelola data barang dengan mudah dan terstruktur.
                     </p>
                 </div>
                 
                 <div class="text-center p-6">
-                    <div class="text-5xl font-thin text-gray-300 dark:text-gray-700 mb-4">02</div>
+                    <div class="text-5xl font-thin section-num mb-4">02</div>
                     <h3 class="text-base font-medium text-gray-900 dark:text-white mb-3">Data Supplier</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 leading-relaxed">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                         Informasi lengkap supplier dalam satu tempat.
                     </p>
                 </div>
                 
                 <div class="text-center p-6">
-                    <div class="text-5xl font-thin text-gray-300 dark:text-gray-700 mb-4">03</div>
+                    <div class="text-5xl font-thin section-num mb-4">03</div>
                     <h3 class="text-base font-medium text-gray-900 dark:text-white mb-3">Monitoring Stok</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 leading-relaxed">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                         Pantau kondisi stok barang secara real-time.
                     </p>
                 </div>
@@ -263,47 +375,45 @@
     </section>
 
     <!-- Fitur Section -->
-    <section id="fitur" class="py-24 px-6">
+    <section id="fitur" class="py-24 px-6 bg-white dark:bg-gray-950">
         <div class="max-w-6xl mx-auto">
-            <!-- Section Header -->
             <div class="text-center mb-16">
-                <span class="text-xs font-medium text-gray-400 dark:text-gray-600 tracking-widest uppercase mb-3 block">02 · FITUR</span>
-                <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3 tracking-tight">
+                <span class="text-xs font-medium tracking-widest uppercase mb-3 block" style="color:var(--green-600)">02 · FITUR</span>
+                <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-4 tracking-tight">
                     Fitur Unggulan
                 </h2>
-                <div class="w-16 h-px bg-gray-300 dark:bg-gray-700 mx-auto"></div>
+                <div class="divider-green w-24 mx-auto"></div>
             </div>
 
-            <!-- Feature Grid -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="feature-card p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800">
-                    <span class="text-xs font-mono text-gray-400 dark:text-gray-600 mb-3 block">F01</span>
+                    <span class="text-xs font-mono mb-3 block" style="color:var(--green-500)">F01</span>
                     <h3 class="text-base font-medium text-gray-900 dark:text-white mb-2">Pencarian Cepat</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-500 leading-relaxed">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                         Cari barang berdasarkan ID atau nama dengan instant search.
                     </p>
                 </div>
 
                 <div class="feature-card p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800">
-                    <span class="text-xs font-mono text-gray-400 dark:text-gray-600 mb-3 block">F02</span>
+                    <span class="text-xs font-mono mb-3 block" style="color:var(--green-500)">F02</span>
                     <h3 class="text-base font-medium text-gray-900 dark:text-white mb-2">Filter Kategori</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-500 leading-relaxed">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                         Saring barang berdasarkan kategori untuk memudahkan pencarian.
                     </p>
                 </div>
 
                 <div class="feature-card p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800">
-                    <span class="text-xs font-mono text-gray-400 dark:text-gray-600 mb-3 block">F03</span>
+                    <span class="text-xs font-mono mb-3 block" style="color:var(--green-500)">F03</span>
                     <h3 class="text-base font-medium text-gray-900 dark:text-white mb-2">CRUD Barang</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-500 leading-relaxed">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                         Tambah, edit, hapus data barang dengan mudah.
                     </p>
                 </div>
 
                 <div class="feature-card p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800">
-                    <span class="text-xs font-mono text-gray-400 dark:text-gray-600 mb-3 block">F04</span>
+                    <span class="text-xs font-mono mb-3 block" style="color:var(--green-500)">F04</span>
                     <h3 class="text-base font-medium text-gray-900 dark:text-white mb-2">CRUD Supplier</h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-500 leading-relaxed">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                         Kelola data supplier dengan sistem terintegrasi.
                     </p>
                 </div>
@@ -312,20 +422,23 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 px-6 border-t border-gray-100 dark:border-gray-800">
+    <footer class="py-8 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 dark:text-gray-600">
-                <div>© 2026 Toko Indonesia. All rights reserved.</div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 dark:text-gray-600">
+                <div class="flex items-center gap-2">
+                    <div style="width:16px;height:16px;background:var(--green-600);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;">
+                        <svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5"/></svg>
+                    </div>
+                    © 2026 Toko Indonesia. All rights reserved.
+                </div>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <span>Sistem Pergudangan v1.0</span>
-                    <span class="text-gray-300 dark:text-gray-700">|</span>
-                    <span>Deadline: 9 Maret 2026</span>
+                    <span class="text-gray-200 dark:text-gray-700"></span>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Smooth Scroll Script -->
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

@@ -15,28 +15,46 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-       
-            @auth
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('gudang.index')" :active="request()->routeIs('gudang.index')">
-                        {{ __('Gudang') }}
-                    </x-nav-link>
+        <div class="min-h-screen bg-gray-100">
+            <nav class="bg-white border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex h-16 items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-900">{{ config('app.name', 'Laravel') }}</a>
+                            @auth
+                                <x-nav-link :href="route('gudang.index')" :active="request()->routeIs('gudang.index')">
+                                    {{ __('Gudang') }}
+                                </x-nav-link>
+                                <x-nav-link :href="route('gerai.index')" :active="request()->routeIs('gerai.index')">
+                                    {{ __('Gerai') }}
+                                </x-nav-link>
+                                @if(Auth::user()->role === 'admin')
+                                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                                        {{ __('Admin') }}
+                                    </x-nav-link>
+                                @endif
+                            @endauth
+                        </div>
+                        <div class="flex items-center gap-4">
+                            @auth
+                                <span class="text-sm text-gray-700">{{ auth()->user()->name }}</span>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="text-sm text-gray-700 hover:text-gray-900">{{ __('Logout') }}</button>
+                                </form>
+                            @else
+                                <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900">{{ __('Login') }}</a>
+                                <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900">{{ __('Register') }}</a>
+                            @endauth
+                        </div>
+                    </div>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('gerai.index')" :active="request()->routeIs('gerai.index')">
-                        {{ __('Gerai') }}
-                    </x-nav-link>
+            </nav>
+
+            <main class="py-10">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    @yield('content')
                 </div>
-                @if(Auth::user()->role === 'admin')
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                        {{ __('Admin') }}
-                    </x-nav-link>
-                </div>
-                @endif
-            @endauth
-            <main>
-                {{ $slot }}
             </main>
         </div>
     </body>

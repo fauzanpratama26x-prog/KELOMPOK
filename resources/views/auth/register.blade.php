@@ -12,117 +12,265 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <style>
+        :root {
+            --green-50:  #f0fdf4;
+            --green-100: #dcfce7;
+            --green-200: #bbf7d0;
+            --green-300: #86efac;
+            --green-400: #4ade80;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --green-800: #166534;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             margin: 0;
-            background-color: #fafafa;
+            background-color: var(--green-50);
         }
-        .dark body {
-            background-color: #111;
-        }
+        .dark body { background-color: #030f07; }
+
         main {
             flex: 1 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--green-100);
+        }
+        .dark .navbar {
+            background: rgba(10, 30, 18, 0.92);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.08);
+        }
+
+        .logo-accent { color: var(--green-600); }
+
+        .nav-login {
+            font-size: 0.875rem;
+            color: #6b7280;
+            transition: color 0.15s;
+        }
+        .nav-login:hover { color: var(--green-700); }
+        .dark .nav-login { color: #9ca3af; }
+        .dark .nav-login:hover { color: var(--green-400); }
+
+        /* Card */
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--green-100);
+            border-radius: 0.875rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 22rem;
+            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.07);
+        }
+        .dark .card {
+            background: #0d1f12;
+            border-color: rgba(74, 222, 128, 0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Card top accent line */
+        .card-accent {
+            height: 3px;
+            background: linear-gradient(to right, var(--green-400), var(--green-600));
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+        .dark .card-title { color: #f0fdf4; }
+
+        /* Inputs */
+        .form-input {
+            width: 100%;
+            padding: 0.55rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid var(--green-200);
+            border-radius: 0.5rem;
+            background: #ffffff;
+            color: #111827;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+        .form-input::placeholder { color: #9ca3af; }
+        .form-input:focus {
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.12);
+        }
+        .dark .form-input {
+            background: #0a1a0f;
+            border-color: rgba(74, 222, 128, 0.15);
+            color: #d1fae5;
+        }
+        .dark .form-input::placeholder { color: #4b5563; }
+        .dark .form-input:focus {
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+        }
+
+        /* Error */
+        .field-error {
+            margin-top: 0.25rem;
+            font-size: 0.7rem;
+            color: #dc2626;
+        }
+        .dark .field-error { color: #f87171; }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            background: var(--green-700);
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover { background: var(--green-800); }
+        .dark .btn-submit { background: var(--green-600); }
+        .dark .btn-submit:hover { background: var(--green-500); }
+
+        /* Footer */
+        .site-footer {
+            background: #ffffff;
+            border-top: 1px solid var(--green-100);
+            padding: 1.1rem 0;
+        }
+        .dark .site-footer {
+            background: #0d1f12;
+            border-color: rgba(74, 222, 128, 0.06);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 w-full">
+    <!-- Navbar -->
+    <nav class="navbar w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex items-center">
+                <div class="flex items-center gap-2">
+                    <div style="width:26px;height:26px;background:var(--green-600);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                        <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                        </svg>
+                    </div>
                     <a href="{{ url('/') }}" class="text-xl font-semibold text-gray-900 dark:text-white tracking-tight">
-                        TOKO <span class="text-gray-500 dark:text-gray-400 font-light">INDONESIA</span>
+                        TOKO <span class="logo-accent font-light">INDONESIA</span>
                     </a>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <a href="{{ route('login') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition">
-                        Login
-                    </a>
+                <div class="flex items-center">
+                    <a href="{{ route('login') }}" class="nav-login">Login</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <main>
-        <div class="w-full max-w-sm mx-auto px-4">
-            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md p-6">
-                <h2 class="text-xl font-light text-gray-900 dark:text-white mb-6">Register</h2>
+        <div class="card">
+            <div class="card-accent"></div>
+            <h2 class="card-title">Buat Akun Baru</h2>
 
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
-                    <div class="space-y-4">
-                        <div>
-                            <input id="name" 
-                                   type="text" 
-                                   name="name" 
-                                   value="{{ old('name') }}" 
-                                   placeholder="Nama"
-                                   required 
-                                   autofocus 
-                                   class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md focus:border-gray-500 dark:focus:border-gray-400 focus:ring-gray-500 dark:focus:ring-gray-400">
-                            @error('name')
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <input id="email" 
-                                   type="email" 
-                                   name="email" 
-                                   value="{{ old('email') }}" 
-                                   placeholder="Email"
-                                   required 
-                                   class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md focus:border-gray-500 dark:focus:border-gray-400 focus:ring-gray-500 dark:focus:ring-gray-400">
-                            @error('email')
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <input id="password" 
-                                   type="password" 
-                                   name="password" 
-                                   placeholder="Password"
-                                   required 
-                                   class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md focus:border-gray-500 dark:focus:border-gray-400 focus:ring-gray-500 dark:focus:ring-gray-400">
-                            @error('password')
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <input id="password_confirmation" 
-                                   type="password" 
-                                   name="password_confirmation" 
-                                   placeholder="Konfirmasi Password"
-                                   required 
-                                   class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 rounded-md focus:border-gray-500 dark:focus:border-gray-400 focus:ring-gray-500 dark:focus:ring-gray-400">
-                        </div>
-
-                        <button type="submit" 
-                                class="w-full py-2 px-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-md text-sm hover:bg-gray-800 dark:hover:bg-gray-100 transition">
-                            Register
-                        </button>
+                <div style="display:flex; flex-direction:column; gap:0.875rem;">
+                    <div>
+                        <input id="name" type="text" name="name"
+                               value="{{ old('name') }}"
+                               placeholder="Nama lengkap"
+                               required autofocus
+                               class="form-input">
+                        @error('name')
+                            <p class="field-error">{{ $message }}</p>
+                        @enderror
                     </div>
-                </form>
-            </div>
+
+                    <div>
+                        <input id="email" type="email" name="email"
+                               value="{{ old('email') }}"
+                               placeholder="Email"
+                               required
+                               class="form-input">
+                        @error('email')
+                            <p class="field-error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <input id="password" type="password" name="password"
+                               placeholder="Password"
+                               required
+                               class="form-input">
+                        @error('password')
+                            <p class="field-error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <input id="password_confirmation" type="password"
+                               name="password_confirmation"
+                               placeholder="Konfirmasi password"
+                               required
+                               class="form-input">
+                    </div>
+
+                    <div>
+                        <select id="role" name="role" required class="form-input" style="background-color: #ffffff; color: #111827;">
+                            <option value="">-- Pilih Role --</option>
+                            <option value="gerai" {{ old('role') === 'gerai' ? 'selected' : '' }}>Gerai (Penjual)</option>
+                            <option value="gudang" {{ old('role') === 'gudang' ? 'selected' : '' }}>Gudang (Pengelola Stok)</option>
+                            <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin (Approver)</option>
+                        </select>
+                        @error('role')
+                            <p class="field-error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn-submit" style="margin-top:0.25rem;">
+                        Daftar
+                    </button>
+                </div>
+            </form>
+
+            <p style="text-align:center; font-size:0.75rem; color:#9ca3af; margin-top:1.25rem;">
+                Sudah punya akun?
+                <a href="{{ route('login') }}" style="color:var(--green-600); font-weight:500;">Login di sini</a>
+            </p>
         </div>
     </main>
 
-    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-xs text-gray-500 dark:text-gray-500 text-center">
-                © 2026 Toko Indonesia · Sistem Pergudangan
-            </p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-2">
+            <div style="width:14px;height:14px;background:var(--green-600);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5"/>
+                </svg>
+            </div>
+            <p class="text-xs text-gray-400">© 2026 Toko Indonesia · Sistem Pergudangan</p>
         </div>
     </footer>
+
 </body>
 </html>

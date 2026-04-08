@@ -2,75 +2,178 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Barang;
+use App\Models\GeraiBarangStok;
+use App\Models\PermintaanStok;
+use App\Models\PermintaanBarangMasuk;
+use App\Models\Suplier;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 class GudangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-     public function index(Request $request)
+    public function index()
     {
-        $query = Barang::with('suplierRelasi');
+        $requests = PermintaanStok::with(['gerai', 'barang'])
+            ->whereIn('status', ['approved', 'shipped'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
 
-        if ($request->has('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('id_barang', 'LIKE', "%{$search}%")
-                  ->orWhere('nama_barang', 'LIKE', "%{$search}%");
-            });
+        $barangs = Barang::all();
+        $supliers = Suplier::all();
+        $permintaanMasuks = PermintaanBarangMasuk::with(['barang', 'admin'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('gudang.index', compact('requests', 'barangs', 'supliers', 'permintaanMasuks'));
+    }
+
+    public function storeIncomingRequest()
+    {
+        try {
+            \Log::info('Gudang storeIncomingRequest called', request()->all());
+
+            $jenisPermintaan = request('jenis_permintaan');
+
+            if ($jenisPermintaan === 'existing') {
+                request()->validate([
+                    'barang' => 'required|exists:barangs,id_barang',
+                    'quantity' => 'required|integer|min:1',
+                    'notes' => 'nullable|string|max:500',
+                ]);
+
+                PermintaanBarangMasuk::create([
+                    'barang_id' => request('barang'),
+                    'quantity' => request('quantity'),
+                    'notes' => request('notes') ?? '',
+                    'status' => 'pending',
+                    'user_id' => auth()->id(),
+                ]);
+            } elseif ($jenisPermintaan === 'new') {
+                request()->validate([
+                    'nama_barang_baru' => 'required|string|max:255',
+                    'kategori_baru' => 'required|in:Makanan,Kosmetik,Aksesoris',
+                    'harga_baru' => 'required|numeric|min:0',
+                    'suplier_baru' => 'required|exists:supliers,id_suplier',
+                    'quantity' => 'required|integer|min:1',
+                    'notes' => 'nullable|string|max:500',
+                ]);
+
+                PermintaanBarangMasuk::create([
+                    'nama_barang_baru' => request('nama_barang_baru'),
+                    'kategori_baru' => request('kategori_baru'),
+                    'harga_baru' => request('harga_baru'),
+                    'suplier_baru' => request('suplier_baru'),
+                    'quantity' => request('quantity'),
+                    'notes' => request('notes') ?? '',
+                    'status' => 'pending',
+                    'user_id' => auth()->id(),
+                ]);
+            } else {
+                \Log::error('Invalid jenis_permintaan', ['jenis' => $jenisPermintaan]);
+                return back()->with('error', 'Jenis permintaan tidak valid.');
+            }
+
+            return back()->with('success', 'Permintaan barang masuk telah dikirim ke admin untuk approval.');
+        } catch (\Exception $e) {
+            \Log::error('Error in storeIncomingRequest', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    public function storeIncoming()
+    {
+        $permintaan = PermintaanBarangMasuk::findOrFail(request('permintaan_id'));
+
+        if ($permintaan->status !== 'approved') {
+            return back()->with('error', 'Hanya permintaan yang disetujui admin yang bisa diproses.');
         }
 
-        $barangs = $query->paginate(10);
+        if ($permintaan->user_id !== auth()->id()) {
+            return back()->with('error', 'Anda tidak memiliki akses untuk memproses permintaan ini.');
+        }
 
-        return view('gudang.index', compact('barangs'));
+        $validCategories = ['Makanan', 'Kosmetik', 'Aksesoris'];
+        if ($permintaan->nama_barang_baru && !in_array($permintaan->kategori_baru, $validCategories, true)) {
+            return back()->with('error', 'Kategori barang baru tidak valid. Pilih salah satu: Makanan, Kosmetik, Aksesoris.');
+        }
+
+        DB::transaction(function () use ($permintaan) {
+            if ($permintaan->nama_barang_baru) {
+                // Buat barang baru dengan id_barang unik
+                $idBarang = Str::upper('B' . Str::random(8));
+                while (Barang::where('id_barang', $idBarang)->exists()) {
+                    $idBarang = Str::upper('B' . Str::random(8));
+                }
+
+                $barang = Barang::create([
+                    'id_barang' => $idBarang,
+                    'nama_barang' => $permintaan->nama_barang_baru,
+                    'kategori' => $permintaan->kategori_baru,
+                    'harga' => $permintaan->harga_baru,
+                    'suplier' => $permintaan->suplier_baru,
+                    'stok' => $permintaan->quantity,
+                ]);
+            } else {
+                // Tambah stok barang yang ada
+                $barang = $permintaan->barang;
+                $barang->increment('stok', $permintaan->quantity);
+            }
+
+            $permintaan->update(['status' => 'completed']);
+        });
+
+        return back()->with('success', 'Barang masuk berhasil dicatat. Stok gudang telah diperbarui.');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function ship(PermintaanStok $permintaan)
     {
-        //
+        if ($permintaan->status !== 'approved') {
+            return back()->with('error', 'Hanya permintaan yang disetujui admin yang bisa dikirim.');
+        }
+
+        $barang = $permintaan->barang;
+
+        if (!$barang || $barang->stok < $permintaan->quantity) {
+            return back()->with('error', 'Stok gudang tidak mencukupi.');
+        }
+
+        $barang->decrement('stok', $permintaan->quantity);
+        
+        $geraiStok = GeraiBarangStok::where([
+            'gerai_id' => $permintaan->gerai_id,
+            'barang_id' => $permintaan->barang_id,
+        ])->first();
+
+        if ($geraiStok) {
+            $geraiStok->increment('stok', $permintaan->quantity);
+        } else {
+            GeraiBarangStok::create([
+                'gerai_id' => $permintaan->gerai_id,
+                'barang_id' => $permintaan->barang_id,
+                'stok' => $permintaan->quantity,
+            ]);
+        }
+
+        $permintaan->update([
+            'status' => 'shipped',
+            'shipped_at' => now(),
+        ]);
+
+        return back()->with('success', 'Barang berhasil dikirim ke gerai.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function receive(PermintaanStok $permintaan)
     {
-        //
-    }
+        if ($permintaan->status !== 'shipped') {
+            return back()->with('error', 'Hanya permintaan yang sudah dikirim yang bisa dikonfirmasi.');
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $permintaan->update([
+            'status' => 'received',
+            'received_at' => now(),
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', 'Konfirmasi penerimaan berhasil.');
     }
 }

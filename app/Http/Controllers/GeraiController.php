@@ -2,65 +2,109 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Barang;
 use App\Models\Gerai;
+use App\Models\GeraiBarangStok;
+use App\Models\PermintaanStok;
+use App\Models\Transaksi;
 
 class GeraiController extends Controller
 {
-     /**
-     * Display a listing of the resource.
-     */
-     public function index()
+    protected function resolveGerai(): Gerai
     {
-         $gerais = Gerai::all();
-        return view('gerai.index', compact('gerais'));
+        $user = auth()->user();
+
+        $gerai = Gerai::where('nama', $user->name)
+            ->orWhere('nama', 'like', "%{$user->name}%")
+            ->first();
+
+        if (! $gerai) {
+            $gerai = Gerai::first();
+        }
+
+        if (! $gerai) {
+            abort(404, 'Data Gerai belum tersedia. Silakan jalankan seeder atau buat data Gerai terlebih dahulu.');
+        }
+
+        return $gerai;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index()
     {
-        //
+        $gerai = $this->resolveGerai();
+
+        $barangs = Barang::all();
+        $permintaans = PermintaanStok::with(['gerai', 'barang'])
+            ->where('gerai_id', $gerai->id_gerai)
+            ->orderByDesc('created_at')
+            ->paginate(10);
+
+        return view('gerai.index', compact('barangs', 'permintaans'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function storeRequest()
     {
-        //
+        $gerai = $this->resolveGerai();
+
+        request()->validate([
+            'barang' => 'required|exists:barangs,id_barang',
+            'quantity' => 'required|integer|min:1',
+            'notes' => 'nullable|string|max:500',
+        ]);
+
+        PermintaanStok::create([
+            'gerai_id' => $gerai->id_gerai,
+            'barang_id' => request('barang'),
+            'quantity' => request('quantity'),
+            'notes' => request('notes') ?? '',
+            'status' => 'pending',
+        ]);
+
+        return back()->with('success', 'Permintaan stok dikirim ke admin.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function transaksiIndex()
     {
-        //
+        $gerai = $this->resolveGerai();
+
+        $barangs = Barang::all();
+        $transaksis = Transaksi::with(['gerai', 'barang', 'user'])
+            ->where('gerai_id', $gerai->id_gerai)
+            ->orderByDesc('created_at')
+            ->paginate(15);
+
+        return view('gerai.transaksi', compact('transaksis', 'barangs'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function storeTransaksi()
     {
-        //
-    }
+        $gerai = $this->resolveGerai();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        request()->validate([
+            'barang' => 'required|exists:barangs,id_barang',
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $stock = GeraiBarangStok::where([
+            'gerai_id' => $gerai->id_gerai,
+            'barang_id' => request('barang'),
+        ])->first();
+
+        if (! $stock || $stock->stok < request('quantity')) {
+            return back()->with('error', 'Stok tidak cukup untuk transaksi.');
+        }
+
+        $stock->decrement('stok', request('quantity'));
+        $barang = Barang::findOrFail(request('barang'));
+
+        Transaksi::create([
+            'gerai_id' => $gerai->id_gerai,
+            'barang_id' => request('barang'),
+            'quantity' => request('quantity'),
+            'total' => request('quantity') * $barang->harga,
+            'user_id' => auth()->id(),
+        ]);
+
+        return back()->with('success', 'Transaksi berhasil dicatat.');
     }
 }
