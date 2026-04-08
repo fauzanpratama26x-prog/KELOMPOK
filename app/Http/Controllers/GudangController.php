@@ -100,7 +100,7 @@ class GudangController extends Controller
 
         DB::transaction(function () use ($permintaan) {
             if ($permintaan->nama_barang_baru) {
-                // Buat barang baru dengan id_barang unik
+                
                 $idBarang = Str::upper('B' . Str::random(8));
                 while (Barang::where('id_barang', $idBarang)->exists()) {
                     $idBarang = Str::upper('B' . Str::random(8));
@@ -115,7 +115,7 @@ class GudangController extends Controller
                     'stok' => $permintaan->quantity,
                 ]);
             } else {
-                // Tambah stok barang yang ada
+                
                 $barang = $permintaan->barang;
                 $barang->increment('stok', $permintaan->quantity);
             }

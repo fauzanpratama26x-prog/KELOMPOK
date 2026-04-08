@@ -7,55 +7,43 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
+        
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
+        
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-200">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex h-16 items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-900">{{ config('app.name', 'Laravel') }}</a>
-                            @auth
-                                <x-nav-link :href="route('gudang.index')" :active="request()->routeIs('gudang.index')">
-                                    {{ __('Gudang') }}
-                                </x-nav-link>
-                                <x-nav-link :href="route('gerai.index')" :active="request()->routeIs('gerai.index')">
-                                    {{ __('Gerai') }}
-                                </x-nav-link>
-                                @if(Auth::user()->role === 'admin')
-                                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                                        {{ __('Admin') }}
-                                    </x-nav-link>
-                                @endif
-                            @endauth
-                        </div>
-                        <div class="flex items-center gap-4">
-                            @auth
-                                <span class="text-sm text-gray-700">{{ auth()->user()->name }}</span>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="text-sm text-gray-700 hover:text-gray-900">{{ __('Logout') }}</button>
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900">{{ __('Login') }}</a>
-                                <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900">{{ __('Register') }}</a>
-                            @endauth
-                        </div>
+    <body class="font-sans antialiased bg-white">
+        <div class="min-h-screen flex flex-col">
+            <nav class="border-b border-slate-200 bg-white">
+                <div class="mx-auto max-w-6xl px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <a href="{{ url('/') }}" class="flex items-center gap-2">
+                            <div class="h-8 w-8 rounded-lg bg-emerald-600"></div>
+                            <span class="text-lg font-semibold text-slate-900">{{ config('app.name', 'Toko Indonesia') }}</span>
+                        </a>
+                        @auth
+                            <form method="POST" action="{{ route('logout') }}" class="inline">
+                                @csrf
+                                <button type="submit" class="text-sm font-medium text-emerald-700 hover:text-emerald-800">Logout</button>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             </nav>
 
-            <main class="py-10">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <main class="flex-1 px-6 py-10">
+                <div class="mx-auto max-w-6xl">
                     @yield('content')
                 </div>
             </main>
+
+            <footer class="border-t border-slate-200 bg-slate-50 py-6 mt-auto">
+                <div class="mx-auto max-w-6xl px-6 text-center text-sm text-slate-500">
+                    © 2026 Toko Indonesia · Sistem Pergudangan
+                </div>
+            </footer>
         </div>
     </body>
 </html>

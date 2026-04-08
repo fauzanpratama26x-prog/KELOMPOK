@@ -13,15 +13,15 @@
     
     <style>
         :root {
-            --green-50:  #f0fdf4;
-            --green-100: #dcfce7;
-            --green-200: #bbf7d0;
-            --green-300: #86efac;
-            --green-400: #4ade80;
-            --green-500: #22c55e;
-            --green-600: #16a34a;
-            --green-700: #15803d;
-            --green-800: #166534;
+            --green-50:  
+            --green-100: 
+            --green-200: 
+            --green-300: 
+            --green-400: 
+            --green-500: 
+            --green-600: 
+            --green-700: 
+            --green-800: 
         }
 
         body {
@@ -32,11 +32,11 @@
             margin: 0;
             background-color: var(--green-50);
         }
-        .dark body { background-color: #030f07; }
+        .dark body { background-color: 
         main { flex: 1 0 auto; width: 100%; }
         footer { flex-shrink: 0; width: 100%; }
 
-        /* Navbar */
+        
         .navbar {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
@@ -59,11 +59,11 @@
             color: var(--green-400) !important;
         }
         .nav-link {
-            color: #6b7280;
+            color: 
             transition: color 0.15s, border-color 0.15s;
         }
         .nav-link:hover { color: var(--green-700); border-bottom-color: var(--green-300) !important; }
-        .dark .nav-link { color: #9ca3af; }
+        .dark .nav-link { color: 
         .dark .nav-link:hover { color: var(--green-400); border-bottom-color: var(--green-700) !important; }
 
         .user-btn {
@@ -73,27 +73,27 @@
             border: 1px solid var(--green-200);
             border-radius: 0.5rem;
             font-size: 0.875rem;
-            color: #374151;
-            background: #fff;
+            color: 
+            background: 
             cursor: pointer;
             transition: background 0.15s, border-color 0.15s;
         }
         .user-btn:hover { background: var(--green-50); border-color: var(--green-300); }
         .dark .user-btn {
-            background: #0d1f12;
+            background: 
             border-color: rgba(74, 222, 128, 0.15);
-            color: #d1fae5;
+            color: 
         }
         .dark .user-btn:hover { background: rgba(22, 101, 52, 0.15); }
 
         .dropdown-menu {
-            background: #ffffff;
+            background: 
             border: 1px solid var(--green-100);
             border-radius: 0.5rem;
             box-shadow: 0 4px 12px rgba(22, 163, 74, 0.08);
         }
         .dark .dropdown-menu {
-            background: #0d1f12;
+            background: 
             border-color: rgba(74, 222, 128, 0.1);
         }
         .dropdown-item {
@@ -102,20 +102,20 @@
             padding: 0.5rem 1rem;
             text-align: left;
             font-size: 0.875rem;
-            color: #374151;
+            color: 
             transition: background 0.15s;
         }
         .dropdown-item:hover { background: var(--green-50); color: var(--green-800); }
-        .dark .dropdown-item { color: #d1fae5; }
+        .dark .dropdown-item { color: 
         .dark .dropdown-item:hover { background: rgba(22, 101, 52, 0.15); }
 
-        /* Header */
+        
         .page-header {
-            background: #ffffff;
+            background: 
             border-bottom: 1px solid var(--green-100);
         }
         .dark .page-header {
-            background: #0d1f12;
+            background: 
             border-bottom: 1px solid rgba(74, 222, 128, 0.06);
         }
         .header-label {
@@ -147,80 +147,80 @@
         }
         .dark .btn-back:hover { background: rgba(22, 101, 52, 0.25); }
 
-        /* Form card */
+        
         .form-card {
-            background: #ffffff;
+            background: 
             border: 1px solid var(--green-100);
             border-radius: 0.875rem;
             overflow: hidden;
             box-shadow: 0 1px 3px rgba(22, 163, 74, 0.06);
         }
         .dark .form-card {
-            background: #0d1f12;
+            background: 
             border-color: rgba(74, 222, 128, 0.08);
         }
 
-        /* Card top accent */
+        
         .card-accent {
             height: 3px;
             background: linear-gradient(to right, var(--green-400), var(--green-600));
         }
 
-        /* Form labels */
+        
         .form-label {
             display: block;
             font-size: 0.8rem;
             font-weight: 500;
-            color: #374151;
+            color: 
             margin-bottom: 0.375rem;
         }
-        .dark .form-label { color: #d1fae5; }
+        .dark .form-label { color: 
 
         .form-hint {
             margin-top: 0.25rem;
             font-size: 0.7rem;
-            color: #9ca3af;
+            color: 
         }
-        .dark .form-hint { color: #6b7280; }
+        .dark .form-hint { color: 
 
-        /* Inputs & selects */
+        
         .form-input, .form-select {
             width: 100%;
             padding: 0.55rem 0.75rem;
             font-size: 0.875rem;
             border: 1px solid var(--green-200);
             border-radius: 0.5rem;
-            background: #ffffff;
-            color: #111827;
+            background: 
+            color: 
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s;
             box-sizing: border-box;
         }
-        .form-input::placeholder { color: #9ca3af; }
+        .form-input::placeholder { color: 
         .form-input:focus, .form-select:focus {
             border-color: var(--green-500);
             box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.12);
         }
         .dark .form-input, .dark .form-select {
-            background: #0a1a0f;
+            background: 
             border-color: rgba(74, 222, 128, 0.15);
-            color: #d1fae5;
+            color: 
         }
-        .dark .form-input::placeholder { color: #4b5563; }
+        .dark .form-input::placeholder { color: 
         .dark .form-input:focus, .dark .form-select:focus {
             border-color: var(--green-500);
             box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
         }
 
-        /* Field error */
+        
         .field-error {
             margin-top: 0.25rem;
             font-size: 0.75rem;
-            color: #dc2626;
+            color: 
         }
-        .dark .field-error { color: #f87171; }
+        .dark .field-error { color: 
 
-        /* Form divider */
+        
         .form-divider {
             border: none;
             border-top: 1px solid var(--green-50);
@@ -228,7 +228,7 @@
         }
         .dark .form-divider { border-color: rgba(74, 222, 128, 0.05); }
 
-        /* Action buttons */
+        
         .btn-cancel {
             padding: 0.55rem 1rem;
             background: var(--green-50);
@@ -249,7 +249,7 @@
         .btn-submit {
             padding: 0.55rem 1.25rem;
             background: var(--green-700);
-            color: #ffffff;
+            color: 
             border: none;
             border-radius: 0.5rem;
             font-size: 0.875rem;
@@ -261,27 +261,27 @@
         .dark .btn-submit { background: var(--green-600); }
         .dark .btn-submit:hover { background: var(--green-500); }
 
-        /* Footer */
+        
         .site-footer {
-            background: #ffffff;
+            background: 
             border-top: 1px solid var(--green-100);
         }
         .dark .site-footer {
-            background: #0d1f12;
+            background: 
             border-color: rgba(74, 222, 128, 0.06);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Navbar -->
+    
     <nav class="navbar fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="shrink-0 flex items-center gap-2">
                         <div style="width:26px;height:26px;background:var(--green-600);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                            <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
+                            <svg width="14" height="14" fill="none" stroke="
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                             </svg>
                         </div>
@@ -326,7 +326,7 @@
         </div>
     </nav>
 
-    <!-- Header -->
+    
     <header class="page-header pt-20">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
@@ -344,7 +344,7 @@
         </div>
     </header>
 
-    <!-- Main -->
+    
     <main class="py-10">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="form-card">
@@ -355,7 +355,7 @@
 
                         <div style="display:flex; flex-direction:column; gap:1.25rem;">
 
-                            <!-- ID Barang -->
+                            
                             <div>
                                 <label for="id_barang" class="form-label">ID Barang</label>
                                 <input type="text" name="id_barang" id="id_barang"
@@ -368,7 +368,7 @@
                                 <p class="form-hint">Format: BR + 4 digit angka</p>
                             </div>
 
-                            <!-- Kategori -->
+                            
                             <div>
                                 <label for="kategori" class="form-label">Kategori</label>
                                 <select name="kategori" id="kategori" required class="form-select">
@@ -384,7 +384,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Nama Barang -->
+                            
                             <div>
                                 <label for="nama_barang" class="form-label">Nama Barang</label>
                                 <input type="text" name="nama_barang" id="nama_barang"
@@ -395,7 +395,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Harga & Stok -->
+                            
                             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
                                 <div>
                                     <label for="harga" class="form-label">Harga (Rp)</label>
@@ -417,7 +417,7 @@
                                 </div>
                             </div>
 
-                            <!-- Supplier -->
+                            
                             <div>
                                 <label for="suplier" class="form-label">Supplier</label>
                                 <select name="suplier" id="suplier" required class="form-select">
@@ -433,7 +433,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Actions -->
+                            
                             <hr class="form-divider" style="margin-top:0.5rem;">
                             <div style="display:flex; justify-content:flex-end; gap:0.75rem;">
                                 <a href="{{ route('admin.barang.index') }}" class="btn-cancel">Batal</a>
@@ -447,11 +447,11 @@
         </div>
     </main>
 
-    <!-- Footer -->
+    
     <footer class="site-footer py-5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-2">
             <div style="width:14px;height:14px;background:var(--green-600);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;">
-                <svg width="8" height="8" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24">
+                <svg width="8" height="8" fill="none" stroke="
                     <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5"/>
                 </svg>
             </div>

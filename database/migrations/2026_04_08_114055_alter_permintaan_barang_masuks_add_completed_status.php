@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    
     public function up(): void
     {
         Schema::rename('permintaan_barang_masuks', 'permintaan_barang_masuks_old');
@@ -41,9 +39,7 @@ return new class extends Migration
         Schema::drop('permintaan_barang_masuks_old');
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::rename('permintaan_barang_masuks', 'permintaan_barang_masuks_old');

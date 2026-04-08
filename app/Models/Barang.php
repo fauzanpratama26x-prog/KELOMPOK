@@ -11,7 +11,7 @@ class Barang extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    // Tambahkan ini - daftar kolom yang boleh diisi
+    
     protected $fillable = [
         'id_barang',
         'kategori',
@@ -21,8 +21,8 @@ class Barang extends Model
         'suplier'
     ];
 
-    // Atau alternatifnya, gunakan guarded (lebih longgar)
-    // protected $guarded = [];
+    
+    
 
     public function suplierRelasi()
     {

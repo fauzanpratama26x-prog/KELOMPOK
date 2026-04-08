@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ADMIN ROUTES - Hanya untuk admin
+
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [PermintaanStokController::class, 'index'])->name('dashboard');
     Route::post('/permintaan/{permintaan}/approve', [PermintaanStokController::class, 'approve'])->name('permintaan.approve');
@@ -36,14 +36,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/barang-masuk/{permintaan}/approve', [PermintaanStokController::class, 'approveBarangMasuk'])->name('barang-masuk.approve');
     Route::post('/barang-masuk/{permintaan}/reject', [PermintaanStokController::class, 'rejectBarangMasuk'])->name('barang-masuk.reject');
     
-    // Admin hanya bisa lihat barang, tidak bisa tambah/edit/hapus
+    
     Route::get('barang', [BarangController::class, 'index'])->name('barang.index');
     Route::get('barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
     
     Route::resource('suplier', SuplierController::class);
 });
 
-// GUDANG ROUTES - Hanya untuk gudang
+
 Route::middleware(['auth', 'role:gudang'])->prefix('gudang')->name('gudang.')->group(function () {
     Route::get('/', [GudangController::class, 'index'])->name('index');
     Route::get('/barang-masuk', [GudangController::class, 'index'])->name('barang-masuk.index');
@@ -53,7 +53,7 @@ Route::middleware(['auth', 'role:gudang'])->prefix('gudang')->name('gudang.')->g
     Route::post('/permintaan/{permintaan}/receive', [GudangController::class, 'receive'])->name('permintaan.receive');
 });
 
-// GERAI ROUTES - Hanya untuk gerai
+
 Route::middleware(['auth', 'role:gerai'])->prefix('gerai')->name('gerai.')->group(function () {
     Route::get('/', [GeraiController::class, 'index'])->name('index');
     Route::post('/permintaan', [GeraiController::class, 'storeRequest'])->name('permintaan.store');

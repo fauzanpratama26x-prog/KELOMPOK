@@ -13,15 +13,15 @@
     
     <style>
         :root {
-            --green-50:  #f0fdf4;
-            --green-100: #dcfce7;
-            --green-200: #bbf7d0;
-            --green-300: #86efac;
-            --green-400: #4ade80;
-            --green-500: #22c55e;
-            --green-600: #16a34a;
-            --green-700: #15803d;
-            --green-800: #166534;
+            --green-50:  
+            --green-100: 
+            --green-200: 
+            --green-300: 
+            --green-400: 
+            --green-500: 
+            --green-600: 
+            --green-700: 
+            --green-800: 
         }
 
         body {
@@ -32,7 +32,7 @@
             margin: 0;
             background-color: var(--green-50);
         }
-        .dark body { background-color: #030f07; }
+        .dark body { background-color: 
 
         main {
             flex: 1 0 auto;
@@ -42,7 +42,7 @@
             padding: 2rem 1rem;
         }
 
-        /* Navbar */
+        
         .navbar {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
@@ -58,16 +58,16 @@
 
         .nav-login {
             font-size: 0.875rem;
-            color: #6b7280;
+            color: 
             transition: color 0.15s;
         }
         .nav-login:hover { color: var(--green-700); }
-        .dark .nav-login { color: #9ca3af; }
+        .dark .nav-login { color: 
         .dark .nav-login:hover { color: var(--green-400); }
 
-        /* Card */
+        
         .card {
-            background: #ffffff;
+            background: 
             border: 1px solid var(--green-100);
             border-radius: 0.875rem;
             padding: 2rem;
@@ -76,12 +76,12 @@
             box-shadow: 0 4px 16px rgba(22, 163, 74, 0.07);
         }
         .dark .card {
-            background: #0d1f12;
+            background: 
             border-color: rgba(74, 222, 128, 0.08);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
 
-        /* Card top accent line */
+        
         .card-accent {
             height: 3px;
             background: linear-gradient(to right, var(--green-400), var(--green-600));
@@ -92,54 +92,54 @@
         .card-title {
             font-size: 1.25rem;
             font-weight: 300;
-            color: #111827;
+            color: 
             margin-bottom: 1.5rem;
         }
-        .dark .card-title { color: #f0fdf4; }
+        .dark .card-title { color: 
 
-        /* Inputs */
+        
         .form-input {
             width: 100%;
             padding: 0.55rem 0.75rem;
             font-size: 0.875rem;
             border: 1px solid var(--green-200);
             border-radius: 0.5rem;
-            background: #ffffff;
-            color: #111827;
+            background: 
+            color: 
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s;
             box-sizing: border-box;
         }
-        .form-input::placeholder { color: #9ca3af; }
+        .form-input::placeholder { color: 
         .form-input:focus {
             border-color: var(--green-500);
             box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.12);
         }
         .dark .form-input {
-            background: #0a1a0f;
+            background: 
             border-color: rgba(74, 222, 128, 0.15);
-            color: #d1fae5;
+            color: 
         }
-        .dark .form-input::placeholder { color: #4b5563; }
+        .dark .form-input::placeholder { color: 
         .dark .form-input:focus {
             border-color: var(--green-500);
             box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
         }
 
-        /* Error */
+        
         .field-error {
             margin-top: 0.25rem;
             font-size: 0.7rem;
-            color: #dc2626;
+            color: 
         }
-        .dark .field-error { color: #f87171; }
+        .dark .field-error { color: 
 
-        /* Submit button */
+        
         .btn-submit {
             width: 100%;
             padding: 0.6rem 1rem;
             background: var(--green-700);
-            color: #ffffff;
+            color: 
             font-size: 0.875rem;
             font-weight: 500;
             border-radius: 0.5rem;
@@ -151,27 +151,27 @@
         .dark .btn-submit { background: var(--green-600); }
         .dark .btn-submit:hover { background: var(--green-500); }
 
-        /* Footer */
+        
         .site-footer {
-            background: #ffffff;
+            background: 
             border-top: 1px solid var(--green-100);
             padding: 1.1rem 0;
         }
         .dark .site-footer {
-            background: #0d1f12;
+            background: 
             border-color: rgba(74, 222, 128, 0.06);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Navbar -->
+    
     <nav class="navbar w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center gap-2">
                     <div style="width:26px;height:26px;background:var(--green-600);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                        <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
+                        <svg width="14" height="14" fill="none" stroke="
                             <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                         </svg>
                     </div>
@@ -236,7 +236,7 @@
                     </div>
 
                     <div>
-                        <select id="role" name="role" required class="form-input" style="background-color: #ffffff; color: #111827;">
+                        <select id="role" name="role" required class="form-input" style="background-color: 
                             <option value="">-- Pilih Role --</option>
                             <option value="gerai" {{ old('role') === 'gerai' ? 'selected' : '' }}>Gerai (Penjual)</option>
                             <option value="gudang" {{ old('role') === 'gudang' ? 'selected' : '' }}>Gudang (Pengelola Stok)</option>
@@ -253,18 +253,18 @@
                 </div>
             </form>
 
-            <p style="text-align:center; font-size:0.75rem; color:#9ca3af; margin-top:1.25rem;">
+            <p style="text-align:center; font-size:0.75rem; color:
                 Sudah punya akun?
                 <a href="{{ route('login') }}" style="color:var(--green-600); font-weight:500;">Login di sini</a>
             </p>
         </div>
     </main>
 
-    <!-- Footer -->
+    
     <footer class="site-footer">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-2">
             <div style="width:14px;height:14px;background:var(--green-600);border-radius:3px;display:inline-flex;align-items:center;justify-content:center;">
-                <svg width="8" height="8" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24">
+                <svg width="8" height="8" fill="none" stroke="
                     <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5"/>
                 </svg>
             </div>
